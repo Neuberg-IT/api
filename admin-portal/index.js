@@ -1,6 +1,6 @@
 var express = require('express');
 const { pushData, executePushRequest } = require('./lead_square_sync');
-const http = require("http");
+const https = require("https");
 var app = express();
 const fs = require("fs");
 var bodyParser = require('body-parser');
@@ -38,11 +38,11 @@ app.post('/StoreLeadsInfo3', jsonParser, StoreLeadsInfo3)
 });  */
 
 
-  http
+  https
   .createServer({
-      //key: fs.readFileSync("security/tutorial.key"),
-      //cert: fs.readFileSync("security/tutorial.crt"),
+      key: fs.readFileSync("security/tutorial.key"),
+      cert: fs.readFileSync("security/tutorial.crt"),
     },app)
   .listen(2096, function () {
-    console.log('http Server is running..');
+    console.log('https Server is running..');
   });  
