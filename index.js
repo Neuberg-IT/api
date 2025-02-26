@@ -1,10 +1,10 @@
 var express = require('express');
 const { pushData, executePushRequest } = require('./lead_square_sync');
-const http = require("http");
-var app = express();
-const fs = require("fs");
+// const http = require("http");
+// var app = express();
+// const fs = require("fs");
 var bodyParser = require('body-parser');
-const { getMasterData } = require('./get_master_data');
+// const { getMasterData } = require('./get_master_data');
 const { GetThirdPartyregistrationdetailsbymobileno } = require('./transaction');
 const { getLead } = require('./lead_square_sync/just_dial');
 const { StoreLeadsInfo } = require('./lead_square_sync/store_leads_info');
