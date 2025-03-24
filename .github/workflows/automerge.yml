@@ -1,9 +1,27 @@
-pull_request_rules:
-  - name: Merge dev to main after CI passes
-    conditions:
-      - "base=main"
-      - "head=dev"
-      - "status-success=Jenkins"
-    actions:
-      merge:
-        method: squash
+name: Auto Pull main → dev
+
+on:
+  push:
+    branches:
+      - main  # Trigger when main is updated
+
+jobs:
+  sync-branches:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout dev branch
+        uses: actions/checkout@v4
+        with:
+          ref: dev
+          fetch-depth: 0
+
+      - name: Merge main into dev
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git checkout dev
+          git pull origin dev
+          git merge main --no-edit
+          git push origin dev
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
